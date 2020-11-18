@@ -51,6 +51,25 @@ SinglyLinkedList
 SinglyLinkedList__get(SinglyLinkedList list, unsigned position);
 
 /**
+ * @brief Swap the linked list.
+ *
+ * @param beforeFirst The linked list before the first.
+ * @param first The first linked list.
+ * @param beforeSecond The linked list before the second.
+ * @param second The second linked list.
+ */
+void
+SinglyLinkedList__swap(SinglyLinkedList* beforeFirst, SinglyLinkedList* first, SinglyLinkedList* beforeSecond, SinglyLinkedList* second);
+
+/**
+ * @brief Sort the linked list naively.
+ * 
+ * @param list The linked list.
+ */
+void
+SinglyLinkedList__naiveSort(SinglyLinkedList* list, int (*comparator)(void *, void*));
+
+/**
  * @brief Free all the memory containing the linked-list instance recursively.
  *
  * @param list The linked-list.

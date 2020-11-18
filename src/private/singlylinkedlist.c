@@ -55,6 +55,61 @@ SinglyLinkedList__get(SinglyLinkedList this, unsigned int pos)
 }
 
 void
+SinglyLinkedList__swap(SinglyLinkedList* beforeThis,
+                       SinglyLinkedList* this,
+                       SinglyLinkedList* beforeThat,
+                       SinglyLinkedList* that)
+{
+  SinglyLinkedList temp;
+  if (*beforeThis) {
+    temp = (*beforeThis)->next;
+    (*beforeThis)->next = (*beforeThat)->next;
+    (*beforeThat)->next = temp;
+
+    *this = (*beforeThis)->next;
+    *that = (*beforeThat)->next;
+  } else {
+    (*beforeThat)->next = *this;
+    *this = *that;
+    *that = (*beforeThat)->next;
+  }
+
+  temp = (*this)->next;
+  (*this)->next = (*that)->next;
+  (*that)->next = temp;
+}
+
+void
+SinglyLinkedList__naiveSort(SinglyLinkedList* this,
+                            int (*comparator)(void*, void*))
+{
+  SinglyLinkedList curr = *this;
+  SinglyLinkedList preCurr = NULL;
+
+  if (!curr->next)
+    return;
+  SinglyLinkedList walker = curr->next;
+  SinglyLinkedList preWalker = curr;
+
+  while (curr && curr->next) {
+    while (walker) {
+      if (comparator(curr->data, walker->data) > 0) {
+        SinglyLinkedList__swap(&preCurr, &curr, &preWalker, &walker);
+      }
+      preWalker = walker;
+      walker = walker->next;
+    }
+    if (preCurr == NULL) {
+      *this = curr;
+    }
+    preCurr = curr;
+    curr = curr->next;
+    preWalker = curr;
+    walker = curr->next;
+  }
+}
+
+void
 SinglyLinkedList__delete(SinglyLinkedList* this, void (*itemDeleteFunc)(void*))
 {
   if (!*this)

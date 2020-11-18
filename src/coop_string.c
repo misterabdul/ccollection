@@ -63,6 +63,14 @@ String__concat(String this, char* value, int length)
   privateData->length += length - 1;
 }
 
+int
+String__compare(String this, String other)
+{
+  StringPrivateData privateData = this->privateData;
+  StringPrivateData otherPrivateData = other->privateData;
+  return strcmp(privateData->data, otherPrivateData->data);
+}
+
 void
 String__delete(void* _this)
 {

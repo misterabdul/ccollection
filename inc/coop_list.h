@@ -61,8 +61,17 @@ void*
 List__get(List list, unsigned int position);
 
 /**
+ * @brief Sort the list with comparator function.
+ *
+ * @param list The list.
+ * @param comparator Comparator function.
+ */
+void
+List__sort(List list, int (*comparator)(void*, void*));
+
+/**
  * @brief Fill array with initialized size with each list item in order.
- * 
+ *
  * @param list The list.
  * @param array The array.
  */

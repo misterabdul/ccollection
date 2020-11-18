@@ -54,6 +54,16 @@ void
 String__concat(String string, char* value, int length);
 
 /**
+ * @brief Compare between two String.
+ * 
+ * @param a The first string.
+ * @param b The second string.
+ * @return int 
+ */
+int
+String__compare(String a, String b);
+
+/**
  * @brief Free the memory containing instance of string.
  *
  * @param string The string.

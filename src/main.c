@@ -5,13 +5,25 @@
 #include <coop_string.h>
 
 int
+stringComparator(void* a, void* b)
+{
+  return String__compare(a, b);
+}
+
+int
 main(int argc, char* argv[])
 {
   List list = List__new();
   printf("LinkedList<String> list = new LinkedList<>();\n\n");
 
-  char* str[] = { "Lorem", "Ipsum", "Dolor", "Sit", "Amet" };
-  for (int i = 0; i < 5; i++) {
+  char* str[] = { "Lorem",     "Ipsum",       "Dolor",      "Sit",
+                  "Amet",      "Consectetur", "Adipiscing", "Elit",
+                  "Nullam",    "Phatera",     "Urna",       "In",
+                  "Tellus",    "Dignissim",   "Mollis",     "Proin",
+                  "Molestei",  "Gravida",     "Eget",       "Ullamcorper",
+                  "Vivamus",   "Rhoncus",     "Dui",        "Quis",
+                  "Ultricies", "Tempus",      "Anean",      "Ex" };
+  for (int i = 0; i < 8; i++) {
     String s = String__new(str[i], sizeof(str[i]));
     List__push(list, s);
 
@@ -47,6 +59,11 @@ main(int argc, char* argv[])
   for (unsigned int i = 0; i < listCount; i++) {
     printf("arr_s[%u]; // %s\n", i, Object__toString(arr_s[i]));
   }
+  printf("\n");
+
+  printf("list.sort();\n");
+  List__sort(list, &stringComparator);
+  List__toArray(list, &arr_s);
   printf("\n");
 
   List__delete(&list, NULL);

@@ -79,6 +79,17 @@ List__get(List this, unsigned int pos)
 }
 
 void
+List__sort(List this, int (*comparator)(void*, void*))
+{
+  if (!this)
+    return;
+  ListPrivateData privateData = this->privateData;
+  SinglyLinkedList linkedList = privateData->linkedList;
+  SinglyLinkedList__naiveSort(&linkedList, comparator);
+  privateData->linkedList = linkedList;
+}
+
+void
 List__toArray(List this, void* _array)
 {
   if (!this)
