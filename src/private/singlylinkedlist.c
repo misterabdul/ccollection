@@ -43,6 +43,18 @@ SinglyLinkedList__pop(SinglyLinkedList* this)
   return poppedObject;
 }
 
+unsigned int SinglyLinkedList__count(SinglyLinkedList this)
+{
+  if (!this)
+    return 0;
+  unsigned int count = 0;
+  while (this) {
+    count++;
+    this = this->next;
+  }
+  return count;
+}
+
 SinglyLinkedList
 SinglyLinkedList__get(SinglyLinkedList this, unsigned int pos)
 {
@@ -107,6 +119,70 @@ SinglyLinkedList__naiveSort(SinglyLinkedList* this,
     preWalker = curr;
     walker = curr->next;
   }
+}
+
+void
+splitMiddle(SinglyLinkedList this, SinglyLinkedList* middle)
+{
+  SinglyLinkedList _middle = this;
+  while (this) {
+    this = this->next;
+    if (this) {
+      this = this->next;
+      if (this)
+        _middle = _middle->next;
+    }
+  }
+  *middle = _middle->next;
+  _middle->next = NULL;
+}
+
+void
+SinglyLinkedList__mergeSort(SinglyLinkedList* this,
+                            int (*comparator)(void*, void*))
+{
+  if (!*this || !(*this)->next)
+    return;
+
+  SinglyLinkedList start = *this;
+  SinglyLinkedList middle = start;
+  splitMiddle(start, &middle);
+
+  SinglyLinkedList__mergeSort(&start, comparator);
+  SinglyLinkedList__mergeSort(&middle, comparator);
+
+  SinglyLinkedList result = NULL;
+  SinglyLinkedList walkerResult = NULL;
+  while (start && middle) {
+    SinglyLinkedList temp = NULL;
+
+    if (comparator(start->data, middle->data) > 0) {
+      temp = middle;
+      middle = middle->next;
+    } else {
+      temp = start;
+      start = start->next;
+    }
+
+    if (result) {
+      walkerResult->next = temp;
+      walkerResult = walkerResult->next;
+    } else {
+      result = temp;
+      walkerResult = result;
+    }
+
+    if (!start && middle) {
+      walkerResult->next = middle;
+      middle = NULL;
+    }
+    if (!middle && start) {
+      walkerResult->next = start;
+      start = NULL;
+    }
+  }
+
+  *this = result;
 }
 
 void

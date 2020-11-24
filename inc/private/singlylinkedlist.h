@@ -41,6 +41,15 @@ void*
 SinglyLinkedList__pop(SinglyLinkedList* list);
 
 /**
+ * @brief Count total element in the list.
+ *
+ * @param list The list.
+ * @return unsigned int
+ */
+unsigned int
+SinglyLinkedList__count(SinglyLinkedList list);
+
+/**
  * @brief Get the linked list at selected position.
  *
  * @param list The linked list.
@@ -59,22 +68,30 @@ SinglyLinkedList__get(SinglyLinkedList list, unsigned position);
  * @param second The second linked list.
  */
 void
-SinglyLinkedList__swap(SinglyLinkedList* beforeFirst, SinglyLinkedList* first, SinglyLinkedList* beforeSecond, SinglyLinkedList* second);
+SinglyLinkedList__swap(SinglyLinkedList* beforeFirst,
+                       SinglyLinkedList* first,
+                       SinglyLinkedList* beforeSecond,
+                       SinglyLinkedList* second);
 
 /**
  * @brief Sort the linked list naively.
- * 
+ *
  * @param list The linked list.
  */
 void
-SinglyLinkedList__naiveSort(SinglyLinkedList* list, int (*comparator)(void *, void*));
+SinglyLinkedList__naiveSort(SinglyLinkedList* list,
+                            int (*comparator)(void*, void*));
+
+void
+SinglyLinkedList__mergeSort(SinglyLinkedList* list,
+                            int (*comparator)(void*, void*));
 
 /**
  * @brief Free all the memory containing the linked-list instance recursively.
  *
  * @param list The linked-list.
- * @param itemDeleteFunc The function to free the memory for each object in the
- * list.
+ * @param itemDeleteFunc The function to free the memory for each object in
+ * the list.
  */
 void
 SinglyLinkedList__delete(SinglyLinkedList* list, void (*itemDeleteFunc)(void*));

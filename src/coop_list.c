@@ -85,7 +85,8 @@ List__sort(List this, int (*comparator)(void*, void*))
     return;
   ListPrivateData privateData = this->privateData;
   SinglyLinkedList linkedList = privateData->linkedList;
-  SinglyLinkedList__naiveSort(&linkedList, comparator);
+  /*SinglyLinkedList__naiveSort(&linkedList, comparator);*/
+  SinglyLinkedList__mergeSort(&linkedList, comparator);
   privateData->linkedList = linkedList;
 }
 

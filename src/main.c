@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 #include <coop_list.h>
 #include <coop_object.h>
@@ -22,8 +23,15 @@ main(int argc, char* argv[])
                   "Tellus",    "Dignissim",   "Mollis",     "Proin",
                   "Molestei",  "Gravida",     "Eget",       "Ullamcorper",
                   "Vivamus",   "Rhoncus",     "Dui",        "Quis",
+                  "Ultricies", "Tempus",      "Anean",      "Ex",
+                  "Lorem",     "Ipsum",       "Dolor",      "Sit",
+                  "Amet",      "Consectetur", "Adipiscing", "Elit",
+                  "Nullam",    "Phatera",     "Urna",       "In",
+                  "Tellus",    "Dignissim",   "Mollis",     "Proin",
+                  "Molestei",  "Gravida",     "Eget",       "Ullamcorper",
+                  "Vivamus",   "Rhoncus",     "Dui",        "Quis",
                   "Ultricies", "Tempus",      "Anean",      "Ex" };
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 56; i++) {
     String s = String__new(str[i], sizeof(str[i]));
     List__push(list, s);
 
@@ -61,9 +69,12 @@ main(int argc, char* argv[])
   }
   printf("\n");
 
+  clock_t start = clock();
   printf("list.sort();\n");
   List__sort(list, &stringComparator);
   List__toArray(list, &arr_s);
+  clock_t end = clock();
+  printf("// Sorted in : %ld \n", (end - start));
   printf("\n");
 
   List__delete(&list, NULL);
