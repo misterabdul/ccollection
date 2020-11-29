@@ -62,26 +62,28 @@ SinglyLinkedList__get(SinglyLinkedList list, unsigned position);
 /**
  * @brief Swap the linked list.
  *
- * @param beforeFirst The linked list before the first.
  * @param first The first linked list.
- * @param beforeSecond The linked list before the second.
  * @param second The second linked list.
  */
 void
-SinglyLinkedList__swap(SinglyLinkedList* beforeFirst,
-                       SinglyLinkedList* first,
-                       SinglyLinkedList* beforeSecond,
-                       SinglyLinkedList* second);
+SinglyLinkedList__swap(SinglyLinkedList first, SinglyLinkedList second);
 
 /**
  * @brief Sort the linked list naively.
  *
  * @param list The linked list.
+ * @param comparator The comparator function.
  */
 void
 SinglyLinkedList__naiveSort(SinglyLinkedList* list,
                             int (*comparator)(void*, void*));
 
+/**
+ * @brief Sort the linked list with merge sort algorithm.
+ *
+ * @param list The linked list.
+ * @param comparator The comparator function.
+ */
 void
 SinglyLinkedList__mergeSort(SinglyLinkedList* list,
                             int (*comparator)(void*, void*));
